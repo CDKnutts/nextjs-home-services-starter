@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Home Services Website Template
 
-## Getting Started
+A professional, fully-responsive Next.js 14 template for home services businesses (HVAC, plumbing, electrical, etc.).
 
-First, run the development server:
+## ⚡ Quick Start
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit [http://localhost:3000](http://localhost:3000) to see your site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🎯 One-File Customization
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Edit one file to customize everything:** `src/config/brand.ts`
 
-## Learn More
+Change your company info, services, reviews, contact details, and more - all from a single configuration file!
 
-To learn more about Next.js, take a look at the following resources:
+## 📚 Documentation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **[Customization Guide](docs/CUSTOMIZATION.md)** - How to customize the template
+- **[Variables Reference](docs/VARIABLES_REFERENCE.md)** - Complete list of all variables and where they're used
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ✨ Features
 
-## Deploy on Vercel
+- ✅ **Next.js 14** with App Router
+- ✅ **TypeScript** for type safety
+- ✅ **Tailwind CSS v4** for styling
+- ✅ **Fully Responsive** - Mobile-first design
+- ✅ **SEO Optimized** - Meta tags and semantic HTML
+- ✅ **Click-to-Call** phone numbers
+- ✅ **100% Configurable** from single config file
+- ✅ **Lucide Icons** throughout
+- ✅ **Form Ready** - react-hook-form + zod installed
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📦 What's Included
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Sections
+
+1. **Hero Section** - Full-screen banner with CTAs
+2. **Services Section** - Showcases your services in a grid
+3. **Why Choose Us** - Highlight your unique value propositions
+4. **Service Areas** - Display cities you serve with map placeholder
+5. **Reviews** - Customer testimonials with star ratings
+6. **Footer** - Complete contact info and links
+
+### Tech Stack
+
+- Next.js 15.5.5
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- Lucide React (icons)
+- react-hook-form
+- zod
+
+## 🛠️ Project Structure
+
+```
+home-services/
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx          # Root layout with metadata
+│   │   ├── page.tsx            # Homepage
+│   │   └── globals.css         # Global styles & theme
+│   ├── components/
+│   │   ├── HeroSection.tsx
+│   │   ├── ServicesSection.tsx
+│   │   ├── WhyChooseUsSection.tsx
+│   │   ├── ServiceAreasSection.tsx
+│   │   ├── ReviewsSection.tsx
+│   │   └── Footer.tsx
+│   └── config/
+│       └── brand.ts            # 🎯 EDIT THIS FILE!
+├── docs/
+│   ├── CUSTOMIZATION.md
+│   └── VARIABLES_REFERENCE.md
+└── package.json
+```
+
+## 🚀 Deployment
+
+Deploy to Vercel (recommended):
+
+```bash
+npm install -g vercel
+vercel
+```
+
+Also compatible with:
+- Netlify
+- AWS Amplify
+- DigitalOcean App Platform
+- Self-hosted with Node.js
+
+## 📝 License
+
+This is a template - feel free to use it for your projects!
+
+## 🤝 Support
+
+For Next.js questions: [Next.js Documentation](https://nextjs.org/docs)
+
+For Tailwind CSS: [Tailwind Documentation](https://tailwindcss.com/docs)
