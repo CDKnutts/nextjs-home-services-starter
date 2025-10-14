@@ -1,45 +1,36 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useState, use } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import * as Icons from "lucide-react";
 import { brand } from "@/config/brand";
+import ContactForm from "@/components/ContactForm";
+import servicesData from "@/data/services.json";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateStaticParams() {
-  return brand.services.map((service) => ({
-    slug: service.slug,
-  }));
-}
+export default function ServiceDetailPage({ params }: Props) {
+  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  // Unwrap params using React.use (Next.js 15 pattern)
+  const { slug } = use(params);
+
   const service = brand.services.find((s) => s.slug === slug);
+  const serviceDetails = servicesData.find((s) => s.slug === slug);
 
-  if (!service) {
-    return {
-      title: "Service Not Found",
-    };
-  }
-
-  return {
-    title: `${service.name} - ${brand.companyName}`,
-    description: service.detailedDescription,
-  };
-}
-
-export default async function ServiceDetailPage({ params }: Props) {
-  const { slug } = await params;
-  const service = brand.services.find((s) => s.slug === slug);
-
-  if (!service) {
+  if (!service || !serviceDetails) {
     notFound();
   }
 
   const IconComponent = Icons[service.icon as keyof typeof Icons] as React.ComponentType<{ size?: number; className?: string }>;
   const otherServices = brand.services.filter((s) => s.slug !== slug).slice(0, 3);
+
+  const toggleFaq = (index: number) => {
+    setExpandedFaq(expandedFaq === index ? null : index);
+  };
 
   return (
     <div className="min-h-screen">
@@ -87,6 +78,63 @@ export default async function ServiceDetailPage({ params }: Props) {
                   </li>
                 ))}
               </ul>
+
+              {/* Process Steps */}
+              <h3 className="text-2xl font-bold mb-6 text-gray-900">
+                Our Process
+              </h3>
+              <div className="space-y-6 mb-12">
+                {serviceDetails.processSteps.map((step, index) => (
+                  <div key={index} className="flex gap-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg">
+                        {index + 1}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-bold text-gray-900 mb-2">
+                        {step.title}
+                      </h4>
+                      <p className="text-gray-700">
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* FAQ Accordion */}
+              <h3 className="text-2xl font-bold mb-6 text-gray-900">
+                Frequently Asked Questions
+              </h3>
+              <div className="space-y-4 mb-12">
+                {serviceDetails.faqs.map((faq, index) => (
+                  <div
+                    key={index}
+                    className="border border-gray-200 rounded-lg overflow-hidden"
+                  >
+                    <button
+                      onClick={() => toggleFaq(index)}
+                      className="w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition-colors"
+                    >
+                      <span className="font-semibold text-gray-900 pr-4">
+                        {faq.question}
+                      </span>
+                      <Icons.ChevronDown
+                        size={20}
+                        className={`flex-shrink-0 text-primary transition-transform ${
+                          expandedFaq === index ? "transform rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                    {expandedFaq === index && (
+                      <div className="px-5 pb-5 text-gray-700">
+                        {faq.answer}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
 
               {/* Why Choose Us Section */}
               <div className="bg-gray-50 rounded-lg p-8">
@@ -166,9 +214,16 @@ export default async function ServiceDetailPage({ params }: Props) {
         </div>
       </section>
 
+      {/* Contact Form Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ContactForm defaultServiceType={slug} showServiceSelect={false} />
+        </div>
+      </section>
+
       {/* Other Services Section */}
       {otherServices.length > 0 && (
-        <section className="py-20 bg-gray-50">
+        <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
               Other Services You Might Need
