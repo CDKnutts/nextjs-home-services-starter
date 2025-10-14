@@ -1,29 +1,94 @@
 "use client";
 
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import Link from "next/link";
+import { Phone, Mail, MapPin, Clock, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import { brand } from "@/config/brand";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-12">
+    <footer id="contact" className="bg-neutral-900 text-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          {/* Column 1: Company Info + Logo */}
           <div>
-            <h3 className="text-2xl font-bold mb-4">{brand.companyName}</h3>
-            <p className="text-gray-300 mb-4">{brand.tagline}</p>
-            <p className="text-sm text-gray-400">
-              Licensed, Insured, and Ready to Serve
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                {brand.companyName.charAt(0)}
+              </div>
+              <span className="font-bold text-xl">{brand.companyName}</span>
+            </div>
+            <p className="text-gray-300 mb-4 leading-relaxed">{brand.tagline}</p>
+            <p className="text-sm text-gray-400 mb-6">
+              Licensed, Insured, and Ready to Serve {brand.region}
+            </p>
+            <p className="text-xs text-gray-500">
+              Serving: {brand.serviceAreas.join(", ")}
             </p>
           </div>
 
-          {/* Contact Info */}
+          {/* Column 2: Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
+            <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
             <ul className="space-y-3">
               <li>
+                <Link
+                  href="/"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  Services
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/about"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3: All Services */}
+          <div>
+            <h4 className="text-lg font-semibold mb-6">Our Services</h4>
+            <ul className="space-y-3">
+              {brand.services.map((service) => (
+                <li key={service.slug}>
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className="text-gray-300 hover:text-white transition-colors"
+                  >
+                    {service.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4: Contact Info + Hours + Social */}
+          <div>
+            <h4 className="text-lg font-semibold mb-6">Contact Us</h4>
+            <ul className="space-y-4 mb-6">
+              <li>
                 <a
-                  href={`tel:${brand.phone.replace(/\D/g, '')}`}
+                  href={`tel:${brand.phone.replace(/\D/g, "")}`}
                   className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
                 >
                   <Phone size={18} />
@@ -32,11 +97,11 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href={`tel:${brand.emergencyPhone.replace(/\D/g, '')}`}
+                  href={`tel:${brand.emergencyPhone.replace(/\D/g, "")}`}
                   className="flex items-center gap-2 text-secondary hover:text-white transition-colors"
                 >
                   <Phone size={18} className="animate-pulse" />
-                  <span>
+                  <span className="text-sm">
                     Emergency: {brand.emergencyPhone}
                   </span>
                 </a>
@@ -50,13 +115,6 @@ export default function Footer() {
                   {brand.email}
                 </a>
               </li>
-            </ul>
-          </div>
-
-          {/* Location & Hours */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Location & Hours</h4>
-            <ul className="space-y-3">
               <li className="flex items-start gap-2 text-gray-300">
                 <MapPin size={18} className="mt-1 flex-shrink-0" />
                 <span>{brand.address}</span>
@@ -66,32 +124,65 @@ export default function Footer() {
                 <span>{brand.hours}</span>
               </li>
             </ul>
-          </div>
 
-          {/* Service Areas */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Service Areas</h4>
-            <ul className="space-y-2">
-              {brand.serviceAreas.slice(0, 4).map((area, index) => (
-                <li key={index} className="text-gray-300">
-                  {area}
-                </li>
-              ))}
-              {brand.serviceAreas.length > 4 && (
-                <li className="text-gray-400 text-sm italic">
-                  + {brand.serviceAreas.length - 4} more areas
-                </li>
-              )}
-            </ul>
+            {/* Social Icons */}
+            <div>
+              <h5 className="text-sm font-semibold mb-3 text-gray-400">Follow Us</h5>
+              <div className="flex gap-3">
+                <a
+                  href={brand.social.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors"
+                  aria-label="Facebook"
+                >
+                  <Facebook size={18} />
+                </a>
+                <a
+                  href={brand.social.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors"
+                  aria-label="Twitter"
+                >
+                  <Twitter size={18} />
+                </a>
+                <a
+                  href={brand.social.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors"
+                  aria-label="Instagram"
+                >
+                  <Instagram size={18} />
+                </a>
+                <a
+                  href={brand.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin size={18} />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
-          <p>
-            &copy; {new Date().getFullYear()} {brand.companyName}. All rights
-            reserved.
+        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-400 text-sm">
+            &copy; {new Date().getFullYear()} {brand.companyName}. All rights reserved.
           </p>
+          <div className="flex gap-6 text-sm">
+            <Link href="/about" className="text-gray-400 hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/about" className="text-gray-400 hover:text-white transition-colors">
+              Terms of Service
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
