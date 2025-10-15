@@ -87,27 +87,12 @@ export async function POST(request: NextRequest) {
  * Errors are caught and logged but don't affect the main request
  */
 async function sendEmailNotification(submission: ContactSubmission): Promise<void> {
-  console.log('[EMAIL] sendEmailNotification function called');
-  console.log('[EMAIL] Checking prerequisites:');
-  console.log('[EMAIL]   - resend exists:', !!resend);
-  console.log('[EMAIL]   - NOTIFICATION_EMAIL exists:', !!process.env.NOTIFICATION_EMAIL);
-  console.log('[EMAIL] Submission data:', {
-    business_name: submission.business_name,
-    name: submission.name,
-    service_type: submission.service_type,
-    has_email: !!submission.email,
-    has_phone: !!submission.phone,
-    has_message: !!submission.message,
-    zip_code: submission.zip_code,
-  });
-
   if (!resend || !process.env.NOTIFICATION_EMAIL) {
     console.warn('[EMAIL] Email notification skipped - prerequisites not met');
     return;
   }
 
   try {
-    console.log('[EMAIL] Building HTML email content...');
     const htmlContent = `
       <!DOCTYPE html>
       <html>
@@ -246,23 +231,12 @@ async function sendEmailNotification(submission: ContactSubmission): Promise<voi
       </html>
     `;
 
-    console.log('[EMAIL] HTML content built successfully');
-    console.log('[EMAIL] Preparing to send email with params:', {
-      from: 'leads@reppreps.com',
-      to_exists: !!process.env.NOTIFICATION_EMAIL,
-      subject: `New Lead: ${submission.business_name}`,
-    });
-
-    console.log('[EMAIL] Calling resend.emails.send...');
-    const result = await resend.emails.send({
+    await resend.emails.send({
       from: 'leads@reppreps.com',
       to: process.env.NOTIFICATION_EMAIL,
       subject: `New Lead: ${submission.business_name}`,
       html: htmlContent,
     });
-
-    console.log('[EMAIL] resend.emails.send completed with result:', result);
-    console.log(`[EMAIL] ✅ Email notification sent successfully for ${submission.business_name} lead`);
   } catch (error) {
     console.error('[EMAIL] ❌ Error in sendEmailNotification:', error);
     console.error('[EMAIL] Error details:', JSON.stringify(error, null, 2));
