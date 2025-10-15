@@ -12,19 +12,8 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
 export async function POST(request: NextRequest) {
-  console.log('[API] POST /api/contact - Request received');
-
   try {
     const body: ContactSubmission = await request.json();
-    console.log('[API] Request body received:', {
-      business_name: body.business_name,
-      name: body.name,
-      service_type: body.service_type,
-      zip_code: body.zip_code,
-      has_email: !!body.email,
-      has_phone: !!body.phone,
-      has_message: !!body.message,
-    });
 
     // Validate required fields
     if (!body.business_name || !body.name || !body.email || !body.phone || !body.zip_code) {
@@ -43,8 +32,6 @@ export async function POST(request: NextRequest) {
         autoRefreshToken: false,
       },
     });
-
-    console.log('[API] Inserting into Supabase...');
 
     // Insert into Supabase
     const { data, error } = await supabase
@@ -72,18 +59,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log('[API] Supabase insert successful');
-    console.log('[API] Checking email conditions:');
-    console.log('[API]   - resend exists:', !!resend);
-    console.log('[API]   - NOTIFICATION_EMAIL exists:', !!process.env.NOTIFICATION_EMAIL);
-
     // Send email notification (non-blocking, errors are logged but don't fail the request)
     if (resend && process.env.NOTIFICATION_EMAIL) {
-      console.log('[API] Calling sendEmailNotification with:', {
-        business_name: body.business_name,
-        service_type: body.service_type,
-        name: body.name,
-      });
       sendEmailNotification(body).catch((emailError) => {
         console.error('[API] Email notification failed (non-critical):', emailError);
         console.error('[API] Email error details:', JSON.stringify(emailError, null, 2));
@@ -92,7 +69,6 @@ export async function POST(request: NextRequest) {
       console.warn('[API] Email notification skipped - resend or NOTIFICATION_EMAIL not configured');
     }
 
-    console.log('[API] Returning success response');
     return NextResponse.json(
       { success: true, data },
       { status: 200 }
