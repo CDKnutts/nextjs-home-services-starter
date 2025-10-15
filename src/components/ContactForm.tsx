@@ -49,27 +49,39 @@ export default function ContactForm({
     setSubmitStatus('idle');
     setErrorMessage('');
 
+    console.log('[FORM] Form submission started with data:', data);
+
+    const requestPayload = {
+      business_name: brand.companyName,
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      service_type: data.service_type || null,
+      message: data.message,
+      zip_code: data.zipCode,
+    };
+
+    console.log('[FORM] Request payload:', requestPayload);
+
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          business_name: brand.companyName,
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-          service_type: data.service_type || null,
-          message: data.message,
-          zip_code: data.zipCode,
-        }),
+        body: JSON.stringify(requestPayload),
       });
+
+      console.log('[FORM] API Response status:', response.status, response.statusText);
+
+      const responseData = await response.json();
+      console.log('[FORM] API Response data:', responseData);
 
       if (!response.ok) {
         throw new Error('Failed to submit form');
       }
 
+      console.log('[FORM] Form submission successful');
       setSubmitStatus('success');
       reset();
 
@@ -78,7 +90,7 @@ export default function ContactForm({
         setSubmitStatus('idle');
       }, 5000);
     } catch (error) {
-      console.error('Form submission error:', error);
+      console.error('[FORM] Form submission error:', error);
       setSubmitStatus('error');
       setErrorMessage(brand.forms.contact.errorMessage);
     } finally {

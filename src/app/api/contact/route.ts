@@ -12,11 +12,23 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
 export async function POST(request: NextRequest) {
+  console.log('[API] POST /api/contact - Request received');
+
   try {
     const body: ContactSubmission = await request.json();
+    console.log('[API] Request body received:', {
+      business_name: body.business_name,
+      name: body.name,
+      service_type: body.service_type,
+      zip_code: body.zip_code,
+      has_email: !!body.email,
+      has_phone: !!body.phone,
+      has_message: !!body.message,
+    });
 
     // Validate required fields
     if (!body.business_name || !body.name || !body.email || !body.phone || !body.zip_code) {
+      console.error('[API] Validation failed - missing required fields');
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -31,6 +43,8 @@ export async function POST(request: NextRequest) {
         autoRefreshToken: false,
       },
     });
+
+    console.log('[API] Inserting into Supabase...');
 
     // Insert into Supabase
     const { data, error } = await supabase
@@ -50,36 +64,42 @@ export async function POST(request: NextRequest) {
       .select();
 
     if (error) {
-      console.error('Supabase error:', error);
-      console.error('Supabase error details:', JSON.stringify(error, null, 2));
-      console.error('Insert data attempted:', {
-        business_name: body.business_name,
-        name: body.name,
-        email: body.email,
-        phone: body.phone,
-        service_type: body.service_type || null,
-        zip_code: body.zip_code,
-        status: 'new',
-      });
+      console.error('[API] Supabase error:', error);
+      console.error('[API] Supabase error details:', JSON.stringify(error, null, 2));
       return NextResponse.json(
         { error: 'Failed to submit form', details: error.message },
         { status: 500 }
       );
     }
 
+    console.log('[API] Supabase insert successful');
+    console.log('[API] Checking email conditions:');
+    console.log('[API]   - resend exists:', !!resend);
+    console.log('[API]   - NOTIFICATION_EMAIL exists:', !!process.env.NOTIFICATION_EMAIL);
+    console.log('[API]   - NOTIFICATION_EMAIL value:', process.env.NOTIFICATION_EMAIL);
+
     // Send email notification (non-blocking, errors are logged but don't fail the request)
     if (resend && process.env.NOTIFICATION_EMAIL) {
-      sendEmailNotification(body).catch((emailError) => {
-        console.error('Email notification failed (non-critical):', emailError);
+      console.log('[API] Calling sendEmailNotification with:', {
+        business_name: body.business_name,
+        service_type: body.service_type,
+        name: body.name,
       });
+      sendEmailNotification(body).catch((emailError) => {
+        console.error('[API] Email notification failed (non-critical):', emailError);
+        console.error('[API] Email error details:', JSON.stringify(emailError, null, 2));
+      });
+    } else {
+      console.warn('[API] Email notification skipped - resend or NOTIFICATION_EMAIL not configured');
     }
 
+    console.log('[API] Returning success response');
     return NextResponse.json(
       { success: true, data },
       { status: 200 }
     );
   } catch (error) {
-    console.error('API error:', error);
+    console.error('[API] Unexpected error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -92,11 +112,27 @@ export async function POST(request: NextRequest) {
  * Errors are caught and logged but don't affect the main request
  */
 async function sendEmailNotification(submission: ContactSubmission): Promise<void> {
+  console.log('[EMAIL] sendEmailNotification function called');
+  console.log('[EMAIL] Checking prerequisites:');
+  console.log('[EMAIL]   - resend exists:', !!resend);
+  console.log('[EMAIL]   - NOTIFICATION_EMAIL:', process.env.NOTIFICATION_EMAIL);
+  console.log('[EMAIL] Submission data:', {
+    business_name: submission.business_name,
+    name: submission.name,
+    service_type: submission.service_type,
+    has_email: !!submission.email,
+    has_phone: !!submission.phone,
+    has_message: !!submission.message,
+    zip_code: submission.zip_code,
+  });
+
   if (!resend || !process.env.NOTIFICATION_EMAIL) {
+    console.warn('[EMAIL] Email notification skipped - prerequisites not met');
     return;
   }
 
   try {
+    console.log('[EMAIL] Building HTML email content...');
     const htmlContent = `
       <!DOCTYPE html>
       <html>
@@ -235,15 +271,26 @@ async function sendEmailNotification(submission: ContactSubmission): Promise<voi
       </html>
     `;
 
-    await resend.emails.send({
+    console.log('[EMAIL] HTML content built successfully');
+    console.log('[EMAIL] Preparing to send email with params:', {
+      from: 'leads@reppreps.com',
+      to: process.env.NOTIFICATION_EMAIL,
+      subject: `New Lead: ${submission.business_name}`,
+    });
+
+    console.log('[EMAIL] Calling resend.emails.send...');
+    const result = await resend.emails.send({
       from: 'leads@reppreps.com',
       to: process.env.NOTIFICATION_EMAIL,
       subject: `New Lead: ${submission.business_name}`,
       html: htmlContent,
     });
 
-    console.log(`Email notification sent for ${submission.business_name} lead`);
+    console.log('[EMAIL] resend.emails.send completed with result:', result);
+    console.log(`[EMAIL] ✅ Email notification sent successfully for ${submission.business_name} lead`);
   } catch (error) {
+    console.error('[EMAIL] ❌ Error in sendEmailNotification:', error);
+    console.error('[EMAIL] Error details:', JSON.stringify(error, null, 2));
     // Re-throw to be caught by the caller's catch block
     throw error;
   }
