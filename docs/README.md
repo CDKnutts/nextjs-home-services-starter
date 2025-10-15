@@ -7,9 +7,14 @@ Welcome to the Home Services Template documentation!
 ### [Customization Guide](./CUSTOMIZATION.md)
 Complete guide on how to customize the template for your business:
 - Editing brand configuration
-- Changing colors
+- Changing colors (automatic injection from brand.ts)
 - Modifying sections
 - Adding new features
+- Database setup (Supabase)
+- Email notifications (Resend)
+- Environment variables
+- Multi-client deployment strategy
+- Section IDs for navigation
 - Deployment instructions
 
 ### [Variables Reference](./VARIABLES_REFERENCE.md)
@@ -28,8 +33,10 @@ Comprehensive reference showing:
 ## 💡 Quick Tips
 
 - Edit `src/config/brand.ts` to change ALL business details
-- Colors are defined in both `brand.ts` and `src/app/globals.css` (must match)
+- Colors are automatically injected from `brand.ts` - no manual CSS editing required!
 - All arrays (`services`, `features`, `reviews`, `serviceAreas`) can be freely modified
+- The template supports 200+ client deployments sharing one Supabase database
+- Email notifications sent via Resend with non-blocking error handling
 - The dev server hot-reloads when you save changes
 
 ## 🆘 Need Help?
