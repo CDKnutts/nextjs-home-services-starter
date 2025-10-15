@@ -19,55 +19,33 @@ export default function Footer() {
             </div>
             <p className="text-gray-300 mb-4 leading-relaxed">{brand.tagline}</p>
             <p className="text-sm text-gray-400 mb-6">
-              Licensed, Insured, and Ready to Serve {brand.region}
+              {brand.sections.footer.taglinePrefix} {brand.region}
             </p>
             <p className="text-xs text-gray-500">
-              Serving: {brand.serviceAreas.join(", ")}
+              {brand.sections.footer.servingLabel} {brand.serviceAreas.join(", ")}
             </p>
           </div>
 
           {/* Column 2: Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
+            <h4 className="text-lg font-semibold mb-6">{brand.sections.footer.quickLinksHeading}</h4>
             <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  Contact
-                </Link>
-              </li>
+              {brand.navigation.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-300 hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Column 3: All Services */}
           <div>
-            <h4 className="text-lg font-semibold mb-6">Our Services</h4>
+            <h4 className="text-lg font-semibold mb-6">{brand.sections.footer.servicesHeading}</h4>
             <ul className="space-y-3">
               {brand.services.map((service) => (
                 <li key={service.slug}>
@@ -84,7 +62,7 @@ export default function Footer() {
 
           {/* Column 4: Contact Info + Hours + Social */}
           <div>
-            <h4 className="text-lg font-semibold mb-6">Contact Us</h4>
+            <h4 className="text-lg font-semibold mb-6">{brand.sections.footer.contactHeading}</h4>
             <ul className="space-y-4 mb-6">
               <li>
                 <a
@@ -127,7 +105,7 @@ export default function Footer() {
 
             {/* Social Icons */}
             <div>
-              <h5 className="text-sm font-semibold mb-3 text-gray-400">Follow Us</h5>
+              <h5 className="text-sm font-semibold mb-3 text-gray-400">{brand.sections.footer.socialHeading}</h5>
               <div className="flex gap-3">
                 <a
                   href={brand.social.facebook}
@@ -176,11 +154,11 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} {brand.companyName}. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
-            <Link href="/about" className="text-gray-400 hover:text-white transition-colors">
-              Privacy Policy
+            <Link href={brand.legal.privacyPolicyUrl} className="text-gray-400 hover:text-white transition-colors">
+              {brand.legal.privacyPolicyLabel}
             </Link>
-            <Link href="/about" className="text-gray-400 hover:text-white transition-colors">
-              Terms of Service
+            <Link href={brand.legal.termsOfServiceUrl} className="text-gray-400 hover:text-white transition-colors">
+              {brand.legal.termsOfServiceLabel}
             </Link>
           </div>
         </div>

@@ -10,11 +10,10 @@ export default function ServicesSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Our Services
+            {brand.sections.services.heading}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Comprehensive home services delivered by experienced professionals.
-            We&apos;re committed to quality workmanship and customer satisfaction.
+            {brand.sections.services.subheading}
           </p>
         </div>
 
@@ -45,7 +44,7 @@ export default function ServicesSection() {
                   href={`/services/${service.slug}`}
                   className="inline-flex items-center text-primary hover:text-primary-dark font-semibold transition-colors"
                 >
-                  Learn More
+                  {brand.ui.buttons.learnMore}
                   <LucideIcons.ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
               </div>

@@ -80,7 +80,7 @@ export default function ContactForm({
     } catch (error) {
       console.error('Form submission error:', error);
       setSubmitStatus('error');
-      setErrorMessage('Failed to submit form. Please try again or call us directly.');
+      setErrorMessage(brand.forms.contact.errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -89,7 +89,7 @@ export default function ContactForm({
   return (
     <div className="bg-white rounded-lg shadow-lg p-8">
       <h2 className="text-3xl font-bold mb-6 text-gray-900">
-        Request a Free Quote
+        {brand.forms.contact.heading}
       </h2>
 
       {/* Success Message */}
@@ -97,9 +97,9 @@ export default function ContactForm({
         <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center gap-3 text-green-800">
           <CheckCircle size={24} className="flex-shrink-0" />
           <div>
-            <p className="font-semibold">Thank you for contacting us!</p>
+            <p className="font-semibold">{brand.forms.contact.successTitle}</p>
             <p className="text-sm">
-              We&apos;ll get back to you within 24 hours.
+              {brand.forms.contact.successMessage}
             </p>
           </div>
         </div>
@@ -110,7 +110,7 @@ export default function ContactForm({
         <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-3 text-red-800">
           <AlertCircle size={24} className="flex-shrink-0" />
           <div>
-            <p className="font-semibold">Submission Failed</p>
+            <p className="font-semibold">{brand.forms.contact.errorTitle}</p>
             <p className="text-sm">{errorMessage}</p>
           </div>
         </div>
@@ -123,16 +123,16 @@ export default function ContactForm({
             htmlFor="name"
             className="block text-sm font-semibold text-gray-700 mb-2"
           >
-            Full Name *
+            {brand.forms.contact.labels.name} *
           </label>
           <input
             type="text"
             id="name"
             {...register("name")}
-            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-gray-500 ${
               errors.name ? "border-red-500" : "border-gray-300"
             }`}
-            placeholder="John Smith"
+            placeholder={brand.forms.contact.placeholders.name}
             disabled={isSubmitting}
           />
           {errors.name && (
@@ -149,16 +149,16 @@ export default function ContactForm({
               htmlFor="email"
               className="block text-sm font-semibold text-gray-700 mb-2"
             >
-              Email Address *
+              {brand.forms.contact.labels.email} *
             </label>
             <input
               type="email"
               id="email"
               {...register("email")}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-gray-500 ${
                 errors.email ? "border-red-500" : "border-gray-300"
               }`}
-              placeholder="john@example.com"
+              placeholder={brand.forms.contact.placeholders.email}
               disabled={isSubmitting}
             />
             {errors.email && (
@@ -173,16 +173,16 @@ export default function ContactForm({
               htmlFor="phone"
               className="block text-sm font-semibold text-gray-700 mb-2"
             >
-              Phone Number *
+              {brand.forms.contact.labels.phone} *
             </label>
             <input
               type="tel"
               id="phone"
               {...register("phone")}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-gray-500 ${
                 errors.phone ? "border-red-500" : "border-gray-300"
               }`}
-              placeholder="(555) 123-4567"
+              placeholder={brand.forms.contact.placeholders.phone}
               disabled={isSubmitting}
             />
             {errors.phone && (
@@ -201,7 +201,7 @@ export default function ContactForm({
                 htmlFor="service_type"
                 className="block text-sm font-semibold text-gray-700 mb-2"
               >
-                Service Type
+                {brand.forms.contact.labels.serviceType}
               </label>
               <select
                 id="service_type"
@@ -211,7 +211,7 @@ export default function ContactForm({
                 }`}
                 disabled={isSubmitting}
               >
-                <option value="">Select a service...</option>
+                <option value="">{brand.forms.contact.labels.serviceTypePlaceholder}</option>
                 {brand.services.map((service) => (
                   <option key={service.slug} value={service.slug}>
                     {service.name}
@@ -231,16 +231,16 @@ export default function ContactForm({
               htmlFor="zipCode"
               className="block text-sm font-semibold text-gray-700 mb-2"
             >
-              Zip Code *
+              {brand.forms.contact.labels.zipCode} *
             </label>
             <input
               type="text"
               id="zipCode"
               {...register("zipCode")}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-gray-500 ${
                 errors.zipCode ? "border-red-500" : "border-gray-300"
               }`}
-              placeholder="12345"
+              placeholder={brand.forms.contact.placeholders.zipCode}
               maxLength={5}
               disabled={isSubmitting}
             />
@@ -258,16 +258,16 @@ export default function ContactForm({
             htmlFor="message"
             className="block text-sm font-semibold text-gray-700 mb-2"
           >
-            Message *
+            {brand.forms.contact.labels.message} *
           </label>
           <textarea
             id="message"
             {...register("message")}
             rows={6}
-            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-none ${
+            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-none placeholder:text-gray-500 ${
               errors.message ? "border-red-500" : "border-gray-300"
             }`}
-            placeholder="Tell us about your project or what service you need..."
+            placeholder={brand.forms.contact.placeholders.message}
             disabled={isSubmitting}
           />
           {errors.message && (
@@ -286,15 +286,15 @@ export default function ContactForm({
           {isSubmitting ? (
             <>
               <Loader2 size={20} className="animate-spin" />
-              Sending...
+              {brand.forms.contact.submittingButton}
             </>
           ) : (
-            'Send Message'
+            brand.forms.contact.submitButton
           )}
         </button>
 
         <p className="text-sm text-gray-500 text-center">
-          * Required fields
+          {brand.forms.contact.requiredNote}
         </p>
       </form>
     </div>

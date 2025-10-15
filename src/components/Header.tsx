@@ -37,12 +37,7 @@ export default function Header() {
     };
   }, [isMenuOpen]);
 
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/services", label: "Services" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
-  ];
+  const navLinks = brand.navigation;
 
   const isActive = (href: string) => {
     if (href === "/") {
@@ -109,7 +104,7 @@ export default function Header() {
                 onClick={handleGetQuote}
                 className="bg-secondary hover:bg-secondary-dark text-white font-semibold px-6 py-2.5 rounded-lg transition-all transform hover:scale-105"
               >
-                Get Free Quote
+                {brand.ui.buttons.getFreeQuote}
               </Link>
             </div>
 
@@ -184,7 +179,7 @@ export default function Header() {
                 onClick={handleGetQuote}
                 className="block text-center bg-secondary hover:bg-secondary-dark text-white font-semibold px-6 py-4 rounded-lg transition-all text-lg"
               >
-                Get Free Quote
+                {brand.ui.buttons.getFreeQuote}
               </Link>
             </div>
           </nav>

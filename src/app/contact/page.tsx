@@ -7,17 +7,17 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary to-blue-900 text-white py-20">
+      <section id="contact-hero" className="bg-gradient-to-br from-primary to-blue-900 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-4">Contact Us</h1>
+          <h1 className="text-4xl sm:text-5xl font-bold mb-4">{brand.pages.contact.heroTitle}</h1>
           <p className="text-xl text-gray-100 max-w-2xl mx-auto">
-            Get a free quote or schedule a service appointment
+            {brand.pages.contact.heroSubtitle}
           </p>
         </div>
       </section>
 
       {/* Main Content */}
-      <section className="py-20 bg-gray-50">
+      <section id="contact-form" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Contact Form - 2 columns */}
@@ -29,7 +29,7 @@ export default function ContactPage() {
             <div className="lg:col-span-1">
               <div className="bg-white rounded-lg shadow-lg p-8 sticky top-24">
                 <h3 className="text-2xl font-bold mb-6 text-gray-900">
-                  Contact Information
+                  {brand.pages.contact.infoHeading}
                 </h3>
 
                 <div className="space-y-6">
@@ -37,7 +37,7 @@ export default function ContactPage() {
                   <div>
                     <div className="flex items-center gap-3 mb-2">
                       <Phone size={20} className="text-primary" />
-                      <h4 className="font-semibold text-gray-900">Phone</h4>
+                      <h4 className="font-semibold text-gray-900">{brand.pages.contact.labels.phone}</h4>
                     </div>
                     <a
                       href={`tel:${brand.phone.replace(/\D/g, "")}`}
@@ -50,7 +50,7 @@ export default function ContactPage() {
                       href={`tel:${brand.emergencyPhone.replace(/\D/g, "")}`}
                       className="text-secondary hover:text-secondary-dark transition-colors pl-8 text-sm"
                     >
-                      Emergency: {brand.emergencyPhone}
+                      {brand.pages.contact.labels.emergency} {brand.emergencyPhone}
                     </a>
                   </div>
 
@@ -58,7 +58,7 @@ export default function ContactPage() {
                   <div>
                     <div className="flex items-center gap-3 mb-2">
                       <Mail size={20} className="text-primary" />
-                      <h4 className="font-semibold text-gray-900">Email</h4>
+                      <h4 className="font-semibold text-gray-900">{brand.pages.contact.labels.email}</h4>
                     </div>
                     <a
                       href={`mailto:${brand.email}`}
@@ -72,7 +72,7 @@ export default function ContactPage() {
                   <div>
                     <div className="flex items-center gap-3 mb-2">
                       <MapPin size={20} className="text-primary" />
-                      <h4 className="font-semibold text-gray-900">Address</h4>
+                      <h4 className="font-semibold text-gray-900">{brand.pages.contact.labels.address}</h4>
                     </div>
                     <p className="text-gray-700 pl-8">{brand.address}</p>
                   </div>
@@ -81,11 +81,11 @@ export default function ContactPage() {
                   <div>
                     <div className="flex items-center gap-3 mb-2">
                       <Clock size={20} className="text-primary" />
-                      <h4 className="font-semibold text-gray-900">Hours</h4>
+                      <h4 className="font-semibold text-gray-900">{brand.pages.contact.labels.hours}</h4>
                     </div>
                     <p className="text-gray-700 pl-8">{brand.hours}</p>
                     <p className="text-sm text-secondary font-semibold pl-8 mt-1">
-                      24/7 Emergency Service Available
+                      {brand.pages.contact.emergencyNote}
                     </p>
                   </div>
                 </div>
@@ -95,7 +95,7 @@ export default function ContactPage() {
                 {/* Service Areas */}
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-3">
-                    Service Areas
+                    {brand.pages.contact.serviceAreasHeading}
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {brand.serviceAreas.map((area, index) => (
@@ -113,7 +113,7 @@ export default function ContactPage() {
 
                 {/* Map Placeholder */}
                 <div>
-                  <h4 className="font-semibold text-gray-900 mb-3">Location</h4>
+                  <h4 className="font-semibold text-gray-900 mb-3">{brand.pages.contact.locationHeading}</h4>
                   <div className="w-full h-48 bg-gray-200 rounded-lg flex items-center justify-center text-gray-400">
                     <div className="text-center">
                       <MapPin size={48} className="mx-auto mb-2" />

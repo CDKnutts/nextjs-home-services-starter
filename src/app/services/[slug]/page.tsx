@@ -6,7 +6,6 @@ import { notFound } from "next/navigation";
 import * as Icons from "lucide-react";
 import { brand } from "@/config/brand";
 import ContactForm from "@/components/ContactForm";
-import servicesData from "@/data/services.json";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -19,9 +18,8 @@ export default function ServiceDetailPage({ params }: Props) {
   const { slug } = use(params);
 
   const service = brand.services.find((s) => s.slug === slug);
-  const serviceDetails = servicesData.find((s) => s.slug === slug);
 
-  if (!service || !serviceDetails) {
+  if (!service) {
     notFound();
   }
 
@@ -35,7 +33,7 @@ export default function ServiceDetailPage({ params }: Props) {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary to-blue-900 text-white py-20">
+      <section id="service-detail-hero" className="bg-gradient-to-br from-primary to-blue-900 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-4 mb-4">
             {IconComponent && (
@@ -52,20 +50,20 @@ export default function ServiceDetailPage({ params }: Props) {
       </section>
 
       {/* Main Content */}
-      <section className="py-20 bg-white">
+      <section id="service-detail-content" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Main Content Column */}
             <div className="lg:col-span-2">
               <h2 className="text-3xl font-bold mb-6 text-gray-900">
-                About Our {service.name} Service
+                {brand.pages.serviceDetail.aboutHeading.replace('{serviceName}', service.name)}
               </h2>
               <p className="text-gray-700 leading-relaxed text-lg mb-8">
                 {service.detailedDescription}
               </p>
 
               <h3 className="text-2xl font-bold mb-4 text-gray-900">
-                What&apos;s Included
+                {brand.pages.serviceDetail.whatsIncludedHeading}
               </h3>
               <ul className="space-y-4 mb-12">
                 {service.bulletPoints.map((point, index) => (
@@ -81,10 +79,10 @@ export default function ServiceDetailPage({ params }: Props) {
 
               {/* Process Steps */}
               <h3 className="text-2xl font-bold mb-6 text-gray-900">
-                Our Process
+                {brand.pages.serviceDetail.processHeading}
               </h3>
               <div className="space-y-6 mb-12">
-                {serviceDetails.processSteps.map((step, index) => (
+                {service.processSteps.map((step, index) => (
                   <div key={index} className="flex gap-4">
                     <div className="flex-shrink-0">
                       <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg">
@@ -105,10 +103,10 @@ export default function ServiceDetailPage({ params }: Props) {
 
               {/* FAQ Accordion */}
               <h3 className="text-2xl font-bold mb-6 text-gray-900">
-                Frequently Asked Questions
+                {brand.pages.serviceDetail.faqHeading}
               </h3>
               <div className="space-y-4 mb-12">
-                {serviceDetails.faqs.map((faq, index) => (
+                {service.faqs.map((faq, index) => (
                   <div
                     key={index}
                     className="border border-gray-200 rounded-lg overflow-hidden"
@@ -139,7 +137,7 @@ export default function ServiceDetailPage({ params }: Props) {
               {/* Why Choose Us Section */}
               <div className="bg-gray-50 rounded-lg p-8">
                 <h3 className="text-2xl font-bold mb-6 text-gray-900">
-                  Why Choose {brand.companyName}?
+                  {brand.pages.serviceDetail.whyChooseHeading.replace('{companyName}', brand.companyName)}
                 </h3>
                 <div className="grid md:grid-cols-2 gap-6">
                   {brand.features.map((feature, index) => {
@@ -170,9 +168,9 @@ export default function ServiceDetailPage({ params }: Props) {
             <div className="lg:col-span-1">
               {/* Contact Card */}
               <div className="bg-primary text-white rounded-lg p-8 mb-8 sticky top-24">
-                <h3 className="text-2xl font-bold mb-4">Get Started Today</h3>
+                <h3 className="text-2xl font-bold mb-4">{brand.pages.serviceDetail.getStartedHeading}</h3>
                 <p className="mb-6 text-gray-100">
-                  Contact us for a free consultation and quote
+                  {brand.pages.serviceDetail.getStartedSubheading}
                 </p>
 
                 <div className="space-y-4">
@@ -188,7 +186,7 @@ export default function ServiceDetailPage({ params }: Props) {
                     href="/contact"
                     className="block w-full bg-secondary hover:bg-secondary-dark text-white font-bold py-3 px-6 rounded-lg text-center transition-all"
                   >
-                    Request Free Quote
+                    {brand.ui.buttons.requestQuote}
                   </Link>
                 </div>
 
@@ -215,7 +213,7 @@ export default function ServiceDetailPage({ params }: Props) {
       </section>
 
       {/* Contact Form Section */}
-      <section className="py-20 bg-gray-50">
+      <section id="service-detail-contact" className="py-20 bg-gray-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ContactForm defaultServiceType={slug} showServiceSelect={false} />
         </div>
@@ -223,10 +221,10 @@ export default function ServiceDetailPage({ params }: Props) {
 
       {/* Other Services Section */}
       {otherServices.length > 0 && (
-        <section className="py-20 bg-white">
+        <section id="service-detail-other-services" className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
-              Other Services You Might Need
+              {brand.pages.serviceDetail.otherServicesHeading}
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
               {otherServices.map((otherService) => {
@@ -251,7 +249,7 @@ export default function ServiceDetailPage({ params }: Props) {
                       {otherService.description}
                     </p>
                     <span className="text-primary font-semibold text-sm inline-flex items-center gap-1">
-                      Learn More
+                      {brand.ui.buttons.learnMore}
                       <Icons.ArrowRight size={16} />
                     </span>
                   </Link>
@@ -263,7 +261,7 @@ export default function ServiceDetailPage({ params }: Props) {
                 href="/services"
                 className="text-primary hover:text-primary-dark font-semibold inline-flex items-center gap-2"
               >
-                View All Services
+                {brand.pages.serviceDetail.viewAllServices}
                 <Icons.ArrowRight size={20} />
               </Link>
             </div>

@@ -10,11 +10,10 @@ export default function ReviewsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            What Our Customers Say
+            {brand.sections.reviews.heading}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Don&apos;t just take our word for it. Here&apos;s what homeowners in your area
-            are saying about our services.
+            {brand.sections.reviews.subheading}
           </p>
         </div>
 
@@ -56,13 +55,13 @@ export default function ReviewsSection() {
         {/* Call to Action */}
         <div className="text-center mt-12">
           <p className="text-gray-600 text-lg mb-4">
-            Ready to experience top-rated service yourself?
+            {brand.sections.reviews.ctaSubheading}
           </p>
           <a
             href="#contact"
             className="inline-block bg-secondary hover:bg-secondary-dark text-white font-bold py-3 px-8 rounded-lg transition-all transform hover:scale-105"
           >
-            Get Your Free Quote
+            {brand.sections.reviews.cta}
           </a>
         </div>
       </div>

@@ -11,17 +11,17 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary to-blue-900 text-white py-20">
+      <section id="about-hero" className="bg-gradient-to-br from-primary to-blue-900 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">About Us</h1>
           <p className="text-xl text-gray-100 max-w-2xl mx-auto">
-            Over 20 years of trusted service in {brand.region}
+            {brand.pages.about.heroSubtitle.replace('{region}', brand.region)}
           </p>
         </div>
       </section>
 
       {/* Company Story Section */}
-      <section className="py-20 bg-white">
+      <section id="about-story" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -49,10 +49,10 @@ export default function AboutPage() {
       </section>
 
       {/* Certifications Section */}
-      <section className="py-20 bg-gray-50">
+      <section id="about-certifications" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
-            Our Certifications & Commitments
+            {brand.pages.about.certificationsHeading}
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
             {brand.about.certifications.map((cert, index) => {
@@ -74,13 +74,13 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 bg-white">
+      <section id="about-team" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-4 text-gray-900">
-            Meet Our Team
+            {brand.pages.about.teamHeading}
           </h2>
           <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Our experienced professionals are dedicated to providing exceptional service and expertise
+            {brand.pages.about.teamSubtitle}
           </p>
           <div className="grid md:grid-cols-3 gap-8">
             {brand.about.team.map((member, index) => (
@@ -111,13 +111,13 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline Section */}
-      <section className="py-20 bg-gray-50">
+      <section id="about-timeline" className="py-20 bg-gray-50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-4 text-gray-900">
-            Our Journey
+            {brand.pages.about.timelineHeading}
           </h2>
           <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Two decades of growth, innovation, and commitment to excellence
+            {brand.pages.about.timelineSubtitle}
           </p>
           <div className="space-y-8">
             {brand.about.timeline.map((milestone, index) => (

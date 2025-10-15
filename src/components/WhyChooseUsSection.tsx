@@ -6,15 +6,14 @@ import { brand } from "@/config/brand";
 export default function WhyChooseUsSection() {
 
   return (
-    <section className="py-20 bg-white">
+    <section id="why-choose-us" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Why Choose Us
+            {brand.sections.whyChooseUs.heading}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We&apos;re not just another home services company. Here&apos;s what sets us apart
-            from the competition and makes us the trusted choice for homeowners.
+            {brand.sections.whyChooseUs.subheading}
           </p>
         </div>
 

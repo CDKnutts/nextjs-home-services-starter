@@ -17,7 +17,7 @@ export const brand = {
     description: "Licensed and insured home services company offering installation, repair, maintenance, and emergency services. Available 24/7 with same-day service. 100% satisfaction guaranteed.",
   },
 
-  // Brand Colors (must match globals.css)
+  // Brand Colors (auto-generated in layout.tsx)
   colors: {
     primary: "#0066CC",
     secondary: "#FF6B35"
@@ -33,6 +33,158 @@ export const brand = {
     twitter: "https://twitter.com/yourcompany",
     instagram: "https://instagram.com/yourcompany",
     linkedin: "https://linkedin.com/company/yourcompany",
+  },
+
+  // Navigation Links
+  navigation: [
+    { href: "/", label: "Home" },
+    { href: "/services", label: "Services" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
+  ],
+
+  // Hero Section
+  hero: {
+    heading: "{companyName} - 24/7 Emergency Services",
+    subheading: "Licensed, Insured, and Ready to Help",
+    tagline: "{tagline}",
+    badges: [
+      { icon: "Shield", text: "Licensed & Insured" },
+      { icon: "Clock", text: "24/7 Emergency" },
+      { icon: "CheckCircle", text: "Same Day Service" }
+    ]
+  },
+
+  // UI Text & Labels
+  ui: {
+    buttons: {
+      getFreeQuote: "Get Free Quote",
+      learnMore: "Learn More",
+      requestQuote: "Request Free Quote",
+      sendMessage: "Send Message",
+      callNow: "Call Now",
+      callPhone: "Call {phone}",
+    },
+    mapPlaceholder: {
+      title: "Service Area Map",
+      subtitle: "Replace this with an embedded map or image"
+    }
+  },
+
+  // Legal & Footer Links
+  legal: {
+    privacyPolicyUrl: "/privacy",
+    privacyPolicyLabel: "Privacy Policy",
+    termsOfServiceUrl: "/terms",
+    termsOfServiceLabel: "Terms of Service"
+  },
+
+  // Page-specific Content
+  pages: {
+    about: {
+      heroSubtitle: "Over 20 years of trusted service in {region}",
+      teamHeading: "Meet Our Team",
+      teamSubtitle: "Our experienced professionals are dedicated to providing exceptional service and expertise",
+      certificationsHeading: "Our Certifications & Commitments",
+      timelineHeading: "Our Journey",
+      timelineSubtitle: "Two decades of growth, innovation, and commitment to excellence"
+    },
+    contact: {
+      heroTitle: "Contact Us",
+      heroSubtitle: "Get a free quote or schedule a service appointment",
+      infoHeading: "Contact Information",
+      emergencyNote: "24/7 Emergency Service Available",
+      serviceAreasHeading: "Service Areas",
+      locationHeading: "Location",
+      mapPlaceholder: "Add Google Maps iframe or map component",
+      labels: {
+        phone: "Phone",
+        email: "Email",
+        address: "Address",
+        hours: "Hours",
+        emergency: "Emergency:"
+      }
+    },
+    services: {
+      heroTitle: "Our Services",
+      heroSubtitle: "Comprehensive home services solutions tailored to your needs",
+      ctaHeading: "Ready to Get Started?",
+      ctaSubheading: "Contact us today for a free consultation and quote"
+    },
+    serviceDetail: {
+      aboutHeading: "About Our {serviceName} Service",
+      whatsIncludedHeading: "What's Included",
+      processHeading: "Our Process",
+      faqHeading: "Frequently Asked Questions",
+      whyChooseHeading: "Why Choose {companyName}?",
+      getStartedHeading: "Get Started Today",
+      getStartedSubheading: "Contact us for a free consultation and quote",
+      otherServicesHeading: "Other Services You Might Need",
+      viewAllServices: "View All Services"
+    }
+  },
+
+  // Form Configuration
+  forms: {
+    contact: {
+      heading: "Request a Free Quote",
+      successTitle: "Thank you for contacting us!",
+      successMessage: "We'll get back to you within 24 hours.",
+      errorTitle: "Submission Failed",
+      errorMessage: "Failed to submit form. Please try again or call us directly.",
+      requiredNote: "* Required fields",
+      submitButton: "Send Message",
+      submittingButton: "Sending...",
+      labels: {
+        name: "Full Name",
+        email: "Email Address",
+        phone: "Phone Number",
+        serviceType: "Service Type",
+        serviceTypePlaceholder: "Select a service...",
+        zipCode: "Zip Code",
+        message: "Message"
+      },
+      placeholders: {
+        name: "John Smith",
+        email: "john@example.com",
+        phone: "(555) 123-4567",
+        zipCode: "12345",
+        message: "Tell us about your project or what service you need..."
+      }
+    }
+  },
+
+  // Section Content
+  sections: {
+    services: {
+      heading: "Our Services",
+      subheading: "Comprehensive home services delivered by experienced professionals. We're committed to quality workmanship and customer satisfaction."
+    },
+    whyChooseUs: {
+      heading: "Why Choose Us",
+      subheading: "We're not just another home services company. Here's what sets us apart from the competition and makes us the trusted choice for homeowners."
+    },
+    reviews: {
+      heading: "What Our Customers Say",
+      subheading: "Don't just take our word for it. Here's what homeowners in your area are saying about our services.",
+      cta: "Get Your Free Quote",
+      ctaSubheading: "Ready to experience top-rated service yourself?"
+    },
+    serviceAreas: {
+      heading: "Proudly Serving {region}",
+      subheading: "We provide professional home services to communities throughout the region. If you don't see your city listed, give us a call - we may still serve your area!",
+      listHeading: "Service Areas Include:",
+      notListed: "Don't see your area?",
+      notListedText: "Call us at {phone} to check if we serve your location."
+    },
+    footer: {
+      taglinePrefix: "Licensed, Insured, and Ready to Serve",
+      servingLabel: "Serving:",
+      quickLinksHeading: "Quick Links",
+      servicesHeading: "Our Services",
+      contactHeading: "Contact Us",
+      socialHeading: "Follow Us"
+    }
   },
 
   // About Page - Company Story
@@ -102,6 +254,42 @@ export const brand = {
         "Expert installation by certified technicians",
         "Top-quality equipment from leading manufacturers",
         "Comprehensive warranty coverage on parts and labor"
+      ],
+      processSteps: [
+        {
+          title: "Free Consultation",
+          description: "We start with a thorough assessment of your needs and space to recommend the best solution for your home and budget."
+        },
+        {
+          title: "Custom Quote",
+          description: "Receive a detailed, transparent quote with no hidden fees. We explain all options and help you make an informed decision."
+        },
+        {
+          title: "Professional Installation",
+          description: "Our certified technicians complete the installation with precision, following all manufacturer specifications and local codes."
+        },
+        {
+          title: "Testing & Walkthrough",
+          description: "We thoroughly test the new system and walk you through its operation, answering any questions you may have."
+        }
+      ],
+      faqs: [
+        {
+          question: "How long does a typical installation take?",
+          answer: "Most installations are completed in one day, typically 4-8 hours depending on the complexity of the project. We'll provide a specific timeline during your consultation."
+        },
+        {
+          question: "Do you offer financing options?",
+          answer: "Yes, we offer flexible financing options to make your installation affordable. Ask us about current promotions and payment plans."
+        },
+        {
+          question: "What brands do you install?",
+          answer: "We work with all major industry-leading brands and can help you select the best option for your needs and budget."
+        },
+        {
+          question: "Is there a warranty on the installation?",
+          answer: "Absolutely. All our installations come with a comprehensive warranty covering both parts and labor. Manufacturer warranties also apply to equipment."
+        }
       ]
     },
     {
@@ -115,6 +303,42 @@ export const brand = {
         "Same-day repair service available",
         "Stocked trucks for immediate repairs",
         "Preventive maintenance to avoid future problems"
+      ],
+      processSteps: [
+        {
+          title: "Emergency Response",
+          description: "Contact us anytime, day or night. We prioritize urgent repairs and can often arrive within an hour for emergencies."
+        },
+        {
+          title: "Accurate Diagnosis",
+          description: "Using advanced diagnostic equipment, we quickly identify the root cause of the problem, not just the symptoms."
+        },
+        {
+          title: "Transparent Pricing",
+          description: "Before any work begins, we provide a clear explanation of the issue and a firm price quote for the repair."
+        },
+        {
+          title: "Expert Repair",
+          description: "We complete the repair using quality parts and back our work with a satisfaction guarantee."
+        }
+      ],
+      faqs: [
+        {
+          question: "How quickly can you respond to a repair call?",
+          answer: "For emergencies, we typically arrive within 1-2 hours. For non-emergency repairs, we usually schedule same-day or next-day appointments."
+        },
+        {
+          question: "Do you charge for diagnostics?",
+          answer: "We charge a standard diagnostic fee, which is waived if you proceed with the recommended repair."
+        },
+        {
+          question: "What if the repair doesn't fix the problem?",
+          answer: "We stand behind our work with a 100% satisfaction guarantee. If the issue persists, we'll return at no additional charge to make it right."
+        },
+        {
+          question: "Should I repair or replace my system?",
+          answer: "We'll provide honest recommendations based on the age of your system, repair costs, and potential energy savings of a new unit. We never push unnecessary replacements."
+        }
       ]
     },
     {
@@ -128,6 +352,42 @@ export const brand = {
         "Fast response times, often within an hour",
         "Fully equipped emergency service vehicles",
         "Priority scheduling for urgent situations"
+      ],
+      processSteps: [
+        {
+          title: "24/7 Availability",
+          description: "Call us anytime—our emergency hotline is staffed around the clock, every day of the year."
+        },
+        {
+          title: "Rapid Dispatch",
+          description: "We immediately dispatch the nearest available technician to your location, typically arriving within an hour."
+        },
+        {
+          title: "Quick Assessment",
+          description: "Our technician quickly assesses the situation, prioritizing safety and preventing further damage."
+        },
+        {
+          title: "Immediate Resolution",
+          description: "We carry a full inventory of common parts to complete most emergency repairs on the spot."
+        }
+      ],
+      faqs: [
+        {
+          question: "What qualifies as an emergency?",
+          answer: "Emergencies include complete system failures, safety hazards, water damage, no heat in winter, no cooling in extreme heat, or any situation that threatens your property or comfort."
+        },
+        {
+          question: "Is emergency service more expensive?",
+          answer: "Emergency calls have an after-hours service fee, but repair costs remain the same. We believe in fair, transparent pricing even in emergencies."
+        },
+        {
+          question: "How fast can you get to my location?",
+          answer: "Most emergency calls receive service within 60 minutes. Response times may vary during extreme weather events when call volumes are high."
+        },
+        {
+          question: "Do you service all brands in emergencies?",
+          answer: "Yes, our technicians are trained on all major brands and carry parts for the most common systems."
+        }
       ]
     },
     {
@@ -141,6 +401,42 @@ export const brand = {
         "Detailed written reports with photos and findings",
         "Identification of safety concerns and efficiency issues",
         "Clear recommendations prioritized by importance"
+      ],
+      processSteps: [
+        {
+          title: "Schedule Inspection",
+          description: "Book a convenient time for our certified inspector to visit your property. Most inspections take 1-2 hours."
+        },
+        {
+          title: "Comprehensive Evaluation",
+          description: "We examine all components, test system performance, check for safety issues, and assess efficiency."
+        },
+        {
+          title: "Detailed Report",
+          description: "Receive a comprehensive written report with photos, findings, and prioritized recommendations."
+        },
+        {
+          title: "Expert Guidance",
+          description: "We review the report with you, answer questions, and provide cost estimates for any recommended work."
+        }
+      ],
+      faqs: [
+        {
+          question: "How often should I have an inspection?",
+          answer: "We recommend annual inspections for most systems. Older systems or those under heavy use may benefit from more frequent inspections."
+        },
+        {
+          question: "What's included in the inspection?",
+          answer: "Our comprehensive inspection covers all major components, safety checks, efficiency testing, and identification of potential issues. You'll receive a detailed written report."
+        },
+        {
+          question: "Can you inspect before I buy a home?",
+          answer: "Absolutely. Pre-purchase inspections are one of our most common services. We'll provide a thorough assessment to help inform your buying decision."
+        },
+        {
+          question: "Will you try to sell me services I don't need?",
+          answer: "Never. Our inspectors provide honest assessments and clearly distinguish between critical issues, recommended maintenance, and optional upgrades."
+        }
       ]
     },
     {
@@ -154,6 +450,42 @@ export const brand = {
         "Smart home integration for enhanced control",
         "Rebate and tax credit assistance",
         "Detailed cost-benefit analysis for all options"
+      ],
+      processSteps: [
+        {
+          title: "Energy Audit",
+          description: "We evaluate your current system's efficiency and identify opportunities for improvement and savings."
+        },
+        {
+          title: "Customized Recommendations",
+          description: "Based on your goals and budget, we present upgrade options with projected ROI and energy savings."
+        },
+        {
+          title: "Rebate Assistance",
+          description: "We help you navigate available rebates, tax credits, and financing options to maximize your savings."
+        },
+        {
+          title: "Professional Installation",
+          description: "Our certified team installs your upgrades with minimal disruption and ensures optimal performance."
+        }
+      ],
+      faqs: [
+        {
+          question: "What are the most cost-effective upgrades?",
+          answer: "Programmable thermostats, improved insulation, and high-efficiency equipment typically offer the best return on investment through reduced energy costs."
+        },
+        {
+          question: "Are there tax credits or rebates available?",
+          answer: "Many energy-efficient upgrades qualify for federal tax credits, state rebates, and utility incentives. We stay current on all programs and help you maximize available benefits."
+        },
+        {
+          question: "How much can I save with an upgrade?",
+          answer: "Savings vary based on your current system and chosen upgrades, but many customers see 20-40% reductions in energy costs. We provide specific estimates during consultation."
+        },
+        {
+          question: "Can I upgrade in phases?",
+          answer: "Absolutely. We can create a phased upgrade plan that fits your budget while still delivering meaningful improvements over time."
+        }
       ]
     },
     {
@@ -167,6 +499,42 @@ export const brand = {
         "Priority scheduling and discounted service rates",
         "Extended warranty coverage on equipment",
         "Detailed maintenance records for your home"
+      ],
+      processSteps: [
+        {
+          title: "Choose Your Plan",
+          description: "Select from our flexible maintenance plans designed to fit your needs and budget."
+        },
+        {
+          title: "Scheduled Service",
+          description: "We automatically schedule your maintenance visits at optimal times throughout the year."
+        },
+        {
+          title: "Thorough Maintenance",
+          description: "Each visit includes cleaning, inspection, adjustments, and minor repairs as needed."
+        },
+        {
+          title: "Priority Service",
+          description: "Enjoy priority scheduling, extended warranties, and discounted rates on any needed repairs."
+        }
+      ],
+      faqs: [
+        {
+          question: "What's included in a maintenance plan?",
+          answer: "Plans include scheduled tune-ups, priority scheduling, discounted repair rates, extended warranties, and detailed maintenance records. Specific benefits vary by plan level."
+        },
+        {
+          question: "Can I cancel my plan?",
+          answer: "Yes, our plans are flexible. You can cancel at any time, though we're confident you'll see the value in continued membership."
+        },
+        {
+          question: "Do maintenance plans really save money?",
+          answer: "Absolutely. Regular maintenance reduces energy costs, prevents expensive breakdowns, and extends equipment life. Most members save more than the plan costs."
+        },
+        {
+          question: "What if I need repairs between visits?",
+          answer: "Plan members receive priority scheduling and discounted rates on all repairs. Many plans also include coverage for certain repairs."
+        }
       ]
     }
   ],

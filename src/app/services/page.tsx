@@ -12,17 +12,17 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary to-blue-900 text-white py-20">
+      <section id="services-hero" className="bg-gradient-to-br from-primary to-blue-900 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-4">Our Services</h1>
+          <h1 className="text-4xl sm:text-5xl font-bold mb-4">{brand.pages.services.heroTitle}</h1>
           <p className="text-xl text-gray-100 max-w-2xl mx-auto">
-            Comprehensive home services solutions tailored to your needs
+            {brand.pages.services.heroSubtitle}
           </p>
         </div>
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 bg-gray-50">
+      <section id="services-grid" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8">
             {brand.services.map((service) => {
@@ -88,13 +88,13 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-primary text-white">
+      <section id="services-cta" className="py-20 bg-primary text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Ready to Get Started?
+            {brand.pages.services.ctaHeading}
           </h2>
           <p className="text-xl mb-8 text-gray-100">
-            Contact us today for a free consultation and quote
+            {brand.pages.services.ctaSubheading}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
