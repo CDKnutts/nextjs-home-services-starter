@@ -76,7 +76,6 @@ export async function POST(request: NextRequest) {
     console.log('[API] Checking email conditions:');
     console.log('[API]   - resend exists:', !!resend);
     console.log('[API]   - NOTIFICATION_EMAIL exists:', !!process.env.NOTIFICATION_EMAIL);
-    console.log('[API]   - NOTIFICATION_EMAIL value:', process.env.NOTIFICATION_EMAIL);
 
     // Send email notification (non-blocking, errors are logged but don't fail the request)
     if (resend && process.env.NOTIFICATION_EMAIL) {
@@ -115,7 +114,7 @@ async function sendEmailNotification(submission: ContactSubmission): Promise<voi
   console.log('[EMAIL] sendEmailNotification function called');
   console.log('[EMAIL] Checking prerequisites:');
   console.log('[EMAIL]   - resend exists:', !!resend);
-  console.log('[EMAIL]   - NOTIFICATION_EMAIL:', process.env.NOTIFICATION_EMAIL);
+  console.log('[EMAIL]   - NOTIFICATION_EMAIL exists:', !!process.env.NOTIFICATION_EMAIL);
   console.log('[EMAIL] Submission data:', {
     business_name: submission.business_name,
     name: submission.name,
@@ -274,7 +273,7 @@ async function sendEmailNotification(submission: ContactSubmission): Promise<voi
     console.log('[EMAIL] HTML content built successfully');
     console.log('[EMAIL] Preparing to send email with params:', {
       from: 'leads@reppreps.com',
-      to: process.env.NOTIFICATION_EMAIL,
+      to_exists: !!process.env.NOTIFICATION_EMAIL,
       subject: `New Lead: ${submission.business_name}`,
     });
 

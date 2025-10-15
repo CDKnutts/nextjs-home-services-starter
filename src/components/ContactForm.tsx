@@ -49,7 +49,16 @@ export default function ContactForm({
     setSubmitStatus('idle');
     setErrorMessage('');
 
-    console.log('[FORM] Form submission started with data:', data);
+    // Log non-sensitive data only (visible in browser console)
+    console.log('[FORM] Form submission started:', {
+      business_name: brand.companyName,
+      name: data.name,
+      service_type: data.service_type || null,
+      zip_code: data.zipCode,
+      has_email: !!data.email,
+      has_phone: !!data.phone,
+      has_message: !!data.message,
+    });
 
     const requestPayload = {
       business_name: brand.companyName,
@@ -60,8 +69,6 @@ export default function ContactForm({
       message: data.message,
       zip_code: data.zipCode,
     };
-
-    console.log('[FORM] Request payload:', requestPayload);
 
     try {
       const response = await fetch('/api/contact', {
@@ -75,7 +82,11 @@ export default function ContactForm({
       console.log('[FORM] API Response status:', response.status, response.statusText);
 
       const responseData = await response.json();
-      console.log('[FORM] API Response data:', responseData);
+      console.log('[FORM] API Response:', {
+        success: responseData.success,
+        has_data: !!responseData.data,
+        has_error: !!responseData.error,
+      });
 
       if (!response.ok) {
         throw new Error('Failed to submit form');
