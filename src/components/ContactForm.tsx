@@ -80,7 +80,6 @@ export default function ContactForm({
         setSubmitStatus('idle');
       }, 5000);
     } catch (error) {
-      console.error('[FORM] Form submission error:', error);
       setSubmitStatus('error');
       setErrorMessage(brand.forms.contact.errorMessage);
     } finally {
