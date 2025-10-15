@@ -68,9 +68,6 @@ export default function ContactForm({
         body: JSON.stringify(requestPayload),
       });
 
-      // Consume response body (important for connection handling)
-      await response.json();
-
       if (!response.ok) {
         throw new Error('Failed to submit form');
       }
