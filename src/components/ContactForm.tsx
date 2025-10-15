@@ -129,7 +129,7 @@ export default function ContactForm({
             type="text"
             id="name"
             {...register("name")}
-            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-gray-500 ${
+            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-gray-900 placeholder:text-gray-500 ${
               errors.name ? "border-red-500" : "border-gray-300"
             }`}
             placeholder={brand.forms.contact.placeholders.name}
@@ -155,7 +155,7 @@ export default function ContactForm({
               type="email"
               id="email"
               {...register("email")}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-gray-500 ${
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-gray-900 placeholder:text-gray-500 ${
                 errors.email ? "border-red-500" : "border-gray-300"
               }`}
               placeholder={brand.forms.contact.placeholders.email}
@@ -179,7 +179,7 @@ export default function ContactForm({
               type="tel"
               id="phone"
               {...register("phone")}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-gray-500 ${
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-gray-900 placeholder:text-gray-500 ${
                 errors.phone ? "border-red-500" : "border-gray-300"
               }`}
               placeholder={brand.forms.contact.placeholders.phone}
@@ -206,7 +206,7 @@ export default function ContactForm({
               <select
                 id="service_type"
                 {...register("service_type")}
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-gray-900 ${
                   errors.service_type ? "border-red-500" : "border-gray-300"
                 }`}
                 disabled={isSubmitting}
@@ -237,7 +237,7 @@ export default function ContactForm({
               type="text"
               id="zipCode"
               {...register("zipCode")}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-gray-500 ${
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-gray-900 placeholder:text-gray-500 ${
                 errors.zipCode ? "border-red-500" : "border-gray-300"
               }`}
               placeholder={brand.forms.contact.placeholders.zipCode}
@@ -264,7 +264,7 @@ export default function ContactForm({
             id="message"
             {...register("message")}
             rows={6}
-            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-none placeholder:text-gray-500 ${
+            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-none text-gray-900 placeholder:text-gray-500 ${
               errors.message ? "border-red-500" : "border-gray-300"
             }`}
             placeholder={brand.forms.contact.placeholders.message}

@@ -1,6 +1,6 @@
 export const brand = {
   // Basic Company Info
-  companyName: "Your Company Name",
+  companyName: "ABC Plumbing",
   tagline: "Professional Home Services",
   logo: "/logo.png", // Path to logo image in /public folder
 

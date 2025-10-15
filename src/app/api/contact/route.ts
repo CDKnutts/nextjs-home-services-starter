@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@supabase/supabase-js';
 import type { ContactSubmission } from '@/lib/supabase';
 
 // Initialize Resend (will be undefined if API key not set)
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+
+// Create server-side Supabase client for API routes
+// Use service role key for server-side operations (bypasses RLS)
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
 export async function POST(request: NextRequest) {
   try {
@@ -17,6 +22,15 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Create a server-side Supabase client with service role key
+    // Service role bypasses RLS, which is appropriate for server-side API routes
+    const supabase = createClient(supabaseUrl, supabaseServiceKey, {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+      },
+    });
 
     // Insert into Supabase
     const { data, error } = await supabase
@@ -37,8 +51,18 @@ export async function POST(request: NextRequest) {
 
     if (error) {
       console.error('Supabase error:', error);
+      console.error('Supabase error details:', JSON.stringify(error, null, 2));
+      console.error('Insert data attempted:', {
+        business_name: body.business_name,
+        name: body.name,
+        email: body.email,
+        phone: body.phone,
+        service_type: body.service_type || null,
+        zip_code: body.zip_code,
+        status: 'new',
+      });
       return NextResponse.json(
-        { error: 'Failed to submit form' },
+        { error: 'Failed to submit form', details: error.message },
         { status: 500 }
       );
     }
@@ -212,7 +236,7 @@ async function sendEmailNotification(submission: ContactSubmission): Promise<voi
     `;
 
     await resend.emails.send({
-      from: 'leads@repreps.com',
+      from: 'leads@reppreps.com',
       to: process.env.NOTIFICATION_EMAIL,
       subject: `New Lead: ${submission.business_name}`,
       html: htmlContent,
