@@ -52,7 +52,6 @@ export async function POST(request: NextRequest) {
 
     if (error) {
       console.error('[API] Supabase error:', error);
-      console.error('[API] Supabase error details:', JSON.stringify(error, null, 2));
       return NextResponse.json(
         { error: 'Failed to submit form', details: error.message },
         { status: 500 }
@@ -63,10 +62,7 @@ export async function POST(request: NextRequest) {
     if (resend && process.env.NOTIFICATION_EMAIL) {
       sendEmailNotification(body).catch((emailError) => {
         console.error('[API] Email notification failed (non-critical):', emailError);
-        console.error('[API] Email error details:', JSON.stringify(emailError, null, 2));
       });
-    } else {
-      console.warn('[API] Email notification skipped - resend or NOTIFICATION_EMAIL not configured');
     }
 
     return NextResponse.json(
@@ -88,7 +84,6 @@ export async function POST(request: NextRequest) {
  */
 async function sendEmailNotification(submission: ContactSubmission): Promise<void> {
   if (!resend || !process.env.NOTIFICATION_EMAIL) {
-    console.warn('[EMAIL] Email notification skipped - prerequisites not met');
     return;
   }
 
@@ -238,8 +233,7 @@ async function sendEmailNotification(submission: ContactSubmission): Promise<voi
       html: htmlContent,
     });
   } catch (error) {
-    console.error('[EMAIL] ❌ Error in sendEmailNotification:', error);
-    console.error('[EMAIL] Error details:', JSON.stringify(error, null, 2));
+    console.error('[EMAIL] Error in sendEmailNotification:', error);
     // Re-throw to be caught by the caller's catch block
     throw error;
   }
