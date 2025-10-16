@@ -46,6 +46,7 @@ export async function POST(request: NextRequest) {
           message: body.message || null,
           zip_code: body.zip_code,
           status: 'new',
+          source: 'website_form',  // Lead source identifier
         },
       ])
       .select();

@@ -19,4 +19,6 @@ export type ContactSubmission = {
   message?: string;
   zip_code?: string;
   status?: string;
+  source?: string;        // Lead source identifier (website_form, chatbot, etc.)
+  client_id?: string;     // UUID linking to clients table
 };
